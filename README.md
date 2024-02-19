@@ -4,68 +4,57 @@ Includes Behavior tree for autonomous expedition using py_tree_ros, capture pano
 ![alt text]([https://www.canva.com/design/DAF9NRP2380/_M2eM9W4Zm1YE0XXk61ypg/view?utm_content=DAF9NRP2380&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel]
 
 ## Behavior Tree Structure
-AutEx (Selector)\
-|-- Sequence_1 (Sequence)\
-|   |-- Launch All Nodes\
-|   |-- Set Datum\
-|   |-- Fallback_16 (Selector)\
-|   |   |-- Launch Zed2i\
-|   |   |-- RetryUntilSuccess35\
-|   |-- Fallback_17 (Selector)\
-|   |   |-- Launch arrow detection node\
-|   |   |-- RetryUntilSuccess37\
-|   |-- Fallback_2 (Selector)\
-|   |   |-- Start Rosbag\
-|   |   |-- RetryUntilSuccess2\
-|   |-- Fallback_3 (Selector)\
-|   |   |-- Always Fail Decorator\
-|   |   |-- Sequence_3 (Sequence)\
-|   |       |-- Fallback_6 (Selector)\
-|   |       |   |-- ArrowDetectionCondition\
-|   |       |   |-- Sequence_6 (Sequence)\
-|   |       |       |-- Generate waypoints if arrow not detected\
-|   |       |       |-- Move Wheels\
-|   |       |       |-- ArrowDetectionCondition\
-|   |       |       |-- Fallback_7 (Selector)\
-|   |       |           |-- ArrowVisitedCondition\
-|   |       |           |-- Look for another arrow\
-|   |       |-- Fallback_8 (Selector)\
-|   |       |   |-- Always Fail\
-|   |       |   |-- Sequence_7 (Sequence)\
-|   |       |       |-- Find tf of arrow\
-|   |       |       |-- Generate waypoints towards arrow\
-|   |       |       |-- Move Wheels\
-|   |       |       |-- Follow Waypoints\
-|   |       |       |-- Fallback_19 (Selector)\
-|   |       |           |-- DistanceConditionArrow\
-|   |       |           |-- Turn to align\
-|   |       |-- Fallback_9 (Selector)\
-|   |       |   |-- Sequence_8 (Sequence)\
-|   |       |       |-- Stop wheels\
-|   |       |       |-- Start 10 sec timer\
-|   |       |-- Fallback_10 (Selector)\
-|   |       |   |-- Recheck tf of arrow\
-|   |       |   |-- RetryUntilSuccess14\
-|   |       |-- Fallback_11 (Selector)\
-|   |       |   |-- Save GPS Coordinates\
-|   |       |   |-- RetryUntilSuccess16\
-|   |       |-- Fallback_12 (Selector)\
-|   |       |   |-- Spot turn\
-|   |       |   |-- RetryUntilSuccess12\
-|   |       |-- Fallback_13 (Selector)\
-|   |       |   |-- Generate waypoints in direction of arrow\
-|   |       |   |-- RetryUntilSuccess20\
-|   |       |-- Fallback_14 (Selector)\
-|   |       |   |-- Sequence_9 (Sequence)\
-|   |       |       |-- TimerCondition\
-|   |       |       |-- Move Wheels\
-|   |       |-- Fallback_15 (Selector)\
-|   |           |-- Follow Waypoints\
-|   |           |-- RetryUntilSuccess24\
-|   |   \
-|-- Sequence_2 (Sequence)\
-|   |-- Reboot system\
-|   |-- Always Fail\
+AutEx (Selector)
+\t|-- Sequence_1 (Sequence)
+\t|\t|-- Launch All Nodes
+\t|\t|-- Set Datum
+\t|\t|-- Fallback_16 (Selector)
+\t|\t|\t|-- Launch Zed2i
+\t|\t|\t|-- RetryUntilSuccess35
+\t|\t|-- Fallback_17 (Selector)
+\t|\t|\t|-- Launch arrow detection node
+\t|\t|\t|-- RetryUntilSuccess37
+\t|\t|-- Fallback_2 (Selector)
+\t|\t|\t|-- Start Rosbag
+\t|\t|\t|-- RetryUntilSuccess2
+\t|\t|-- Fallback_3 (Selector)
+\t|\t|\t|-- Always Fail Decorator
+\t|\t|\t|-- Sequence_3 (Sequence)
+\t|\t|\t|\t|-- Fallback_6 (Selector)
+\t|\t|\t|\t|\t|-- ArrowDetectionCondition
+\t|\t|\t|\t|\t|-- Sequence_6 (Sequence)
+\t|\t|\t|\t|\t|\t|-- Generate waypoints if arrow not detected
+\t|\t|\t|\t|\t|\t|-- Move Wheels
+\t|\t|\t|\t|\t|\t|-- ArrowDetectionCondition
+\t|\t|\t|\t|\t|\t|-- Fallback_7 (Selector)
+\t|\t|\t|\t|\t|\t|\t|-- ArrowVisitedCondition
+\t|\t|\t|\t|\t|\t|\t|-- Look for another arrow
+\t|\t|\t|\t|-- Fallback_8 (Selector)
+\t|\t|\t|\t|\t|-- Always Fail
+\t|\t|\t|\t|\t|-- Sequence_7 (Sequence)
+\t|\t|\t|\t|\t|\t|-- Find tf of arrow
+\t|\t|\t|\t|\t|\t|-- Generate waypoints towards arrow
+\t|\t|\t|\t|\t|\t|-- Move Wheels
+\t|\t|\t|\t|\t|\t|-- Follow Waypoints
+\t|\t|\t|\t|\t|\t|-- Fallback_19 (Selector)
+\t|\t|\t|\t|\t|\t|\t|-- DistanceConditionArrow
+\t|\t|\t|\t|\t|\t|\t|-- Turn to align
+\t|\t|\t|\t|-- Fallback_9 (Selector)
+\t|\t|\t|\t|\t|-- Sequence_8 (Sequence)
+\t|\t|\t|\t|\t|\t|-- Stop wheels
+\t|\t|\t|\t|\t|\t|-- Start 10 sec timer
+\t|\t|\t|\t|-- Fallback_10 (Selector)
+\t|\t|\t|\t|\t|-- Recheck tf of arrow
+\t|\t|\t|\t|\t|-- RetryUntilSuccess14
+\t|\t|\t|\t|-- Fallback_11 (Selector)
+\t|\t|\t|\t|\t|-- Save GPS Coordinates
+\t|\t|\t|\t|\t|-- RetryUntilSuccess16
+\t|\t|\t|\t|-- Fallback_12 (Selector)
+\t|\t|\t|\t|\t|-- Spot turn
+\t|\t|\t|\t|\t|-- RetryUntilSuccess12
+\t|\t|\t|\t|-- Fallback_13 (Selector)
+\t|\t|\t|\
+
 
 
 Note: Obstacle Avoidance and path planning is executed using waypoint navigation
