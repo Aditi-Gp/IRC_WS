@@ -5,7 +5,7 @@ Includes Behavior tree for autonomous expedition using py_tree_ros, capture pano
 
 ## Behavior Tree Structure
 AutEx (Selector)
-|-- Sequence_1 (Sequence)
+|-- Sequence_1 (Sequence)\
 |   |-- Launch All Nodes
 |   |-- Set Datum
 |   |-- Fallback_16 (Selector)
