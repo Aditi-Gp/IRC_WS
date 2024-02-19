@@ -1,9 +1,9 @@
 # IRC_WS
-Includes Behavior tree for autonomous expedition using py_tree_ros\
-Capture panorama for every change in 15 degrees for 100 degrees\
-Detect angle between waypoint and yaw\
-Run 5 Esp32 cams at once\
-Capture image  when service is called\
+•Includes Behavior tree for autonomous expedition using py_tree_ros\
+•Capture panorama for every change in 15 degrees for 100 degrees\
+•Detect angle between waypoint and yaw\
+•Run 5 Esp32 cams at once\
+•Capture image  when service is called\
 
 ![alt text]([https://www.canva.com/design/DAF9NRP2380/_M2eM9W4Zm1YE0XXk61ypg/view?utm_content=DAF9NRP2380&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel]
 
