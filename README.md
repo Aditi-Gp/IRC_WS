@@ -4,35 +4,55 @@ Includes Behavior tree for autonomous expedition using py_tree_ros, capture pano
 ![alt text]([https://www.canva.com/design/DAF9NRP2380/_M2eM9W4Zm1YE0XXk61ypg/view?utm_content=DAF9NRP2380&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel]
 
 ## Behavior Tree Structure
-AutEx (Selector)\
-&nbsp; |-- Sequence_1 (Sequence)\
-\t|\t|-- Launch All Nodes
-\t|\t|-- Set Datum
-\t|\t|-- Fallback_16 (Selector)
-\t|\t|\t|-- Launch Zed2i
-\t|\t|\t|-- RetryUntilSuccess35
-\t|\t|-- Fallback_17 (Selector)
-\t|\t|\t|-- Launch arrow detection node
-\t|\t|\t|-- RetryUntilSuccess37
-\t|\t|-- Fallback_2 (Selector)
-\t|\t|\t|-- Start Rosbag
-\t|\t|\t|-- RetryUntilSuccess2
-\t|\t|-- Fallback_3 (Selector)
-\t|\t|\t|-- Always Fail Decorator
-\t|\t|\t|-- Sequence_3 (Sequence)
-\t|\t|\t|\t|-- Fallback_6 (Selector)
-\t|\t|\t|\t|\t|-- ArrowDetectionCondition
-\t|\t|\t|\t|\t|-- Sequence_6 (Sequence)
-\t|\t|\t|\t|\t|\t|-- Generate waypoints if arrow not detected
-\t|\t|\t|\t|\t|\t|-- Move Wheels
-\t|\t|\t|\t|\t|\t|-- ArrowDetectionCondition
-\t|\t|\t|\t|\t|\t|-- Fallback_7 (Selector)
-\t|\t|\t|\t|\t|\t|\t|-- ArrowVisitedCondition
-\t|\t|\t|\t|\t|\t|\t|-- Look for another arrow
-\t|\t|\t|\t|-- Fallback_8 (Selector)
-\t|\t|\t|\t|\t|-- Always Fail
-\t|\t|\t|\t|\t|-- Sequence_7 (Sequence)
-\t|\t|\t|\t|\t|\t|-- Find tf of arrow
+AutEx (Selector)
+&nbsp;|-- Sequence_1 (Sequence)
+&nbsp;|&nbsp;|-- Launch All Nodes
+&nbsp;|&nbsp;|-- Set Datum
+&nbsp;|&nbsp;|-- Fallback_16 (Selector)
+&nbsp;|&nbsp;|&nbsp;|-- Launch Zed2i
+&nbsp;|&nbsp;|&nbsp;|-- RetryUntilSuccess35
+&nbsp;|&nbsp;|-- Fallback_17 (Selector)
+&nbsp;|&nbsp;|&nbsp;|-- Launch arrow detection node
+&nbsp;|&nbsp;|&nbsp;|-- RetryUntilSuccess37
+&nbsp;|&nbsp;|-- Fallback_2 (Selector)
+&nbsp;|&nbsp;|&nbsp;|-- Start Rosbag
+&nbsp;|&nbsp;|&nbsp;|-- RetryUntilSuccess2
+&nbsp;|&nbsp;|-- Fallback_3 (Selector)
+&nbsp;|&nbsp;|&nbsp;|-- Always Fail Decorator
+&nbsp;|&nbsp;|&nbsp;|-- Sequence_3 (Sequence)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_6 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- ArrowDetectionCondition
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Sequence_6 (Sequence)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Generate waypoints if arrow not detected
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Move Wheels
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- ArrowDetectionCondition
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_7 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- ArrowVisitedCondition
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Look for another arrow
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_8 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Always Fail
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Sequence_7 (Sequence)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Find tf of arrow
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Generate waypoints towards arrow
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Move Wheels
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Follow Waypoints
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_19 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- DistanceConditionArrow
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Turn to align
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_9 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Sequence_8 (Sequence)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Stop wheels
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Start 10 sec timer
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_10 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Recheck tf of arrow
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- RetryUntilSuccess14
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_11 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Save GPS Coordinates
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- RetryUntilSuccess16
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_12 (Selector)
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Spot turn
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- RetryUntilSuccess12
+&nbsp;|&nbsp;|&nbsp;|&nbsp;|-- Fallback_13 (Selector)
 \t|\t|\t|\t|\t|\t|-- Generate waypoints towards arrow
 \t|\t|\t|\t|\t|\t|-- Move Wheels
 \t|\t|\t|\t|\t|\t|-- Follow Waypoints
