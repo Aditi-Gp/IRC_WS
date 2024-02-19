@@ -9,7 +9,7 @@ AutEx (Selector)
 |   |-- Launch All Nodes
 |   |-- Set Datum
 |   |-- Fallback_16 (Selector)
-|   |   |-- Launch Zed2i
+|<br></br>|   |-- Launch Zed2i
 |   |   |-- RetryUntilSuccess35
 |   |-- Fallback_17 (Selector)
 |   |   |-- Launch arrow detection node
