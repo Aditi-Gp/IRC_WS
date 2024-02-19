@@ -66,3 +66,6 @@ AutEx (Selector)
 |-- Sequence_2 (Sequence)
 |   |-- Reboot system
 |   |-- Always Fail
+
+
+Note: Obstacle Avoidance and path planning is executed using waypoint navigation
