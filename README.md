@@ -4,8 +4,8 @@ Includes Behavior tree for autonomous expedition using py_tree_ros, capture pano
 ![alt text]([https://www.canva.com/design/DAF9NRP2380/_M2eM9W4Zm1YE0XXk61ypg/view?utm_content=DAF9NRP2380&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel]
 
 ## Behavior Tree Structure
-AutEx (Selector)
-\t|-- Sequence_1 (Sequence)
+AutEx (Selector)\
+Tabspace|-- Sequence_1 (Sequence)\
 \t|\t|-- Launch All Nodes
 \t|\t|-- Set Datum
 \t|\t|-- Fallback_16 (Selector)
